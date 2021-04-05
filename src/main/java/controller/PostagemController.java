@@ -20,10 +20,10 @@ public class PostagemController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o título: ");
-        postagem.setTitulo(in.next());
+        postagem.setTitulo(in.nextLine());
 
         System.out.println("Digite o conteúdo: ");
-        postagem.setConteudo(in.next());
+        postagem.setConteudo(in.nextLine());
 
         postagem.setData(LocalDate.now());
 
@@ -102,10 +102,10 @@ public class PostagemController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o título: ");
-                postagemEditado.setTitulo(in.next());
+                postagemEditado.setTitulo(in.nextLine());
 
                 System.out.println("Digite o conteúdo: ");
-                postagemEditado.setConteudo(in.next());
+                postagemEditado.setConteudo(in.nextLine());
 
                 postagemEditado.setData(LocalDate.now());
 

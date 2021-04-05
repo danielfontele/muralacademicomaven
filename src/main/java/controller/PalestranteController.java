@@ -1,6 +1,7 @@
 package controller;
 
 import model.Palestrante;
+import model.Usuario;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,26 +13,26 @@ public class PalestranteController {
     private Palestrante palestrante;
     private ArrayList<Palestrante> palestrantes = new ArrayList<Palestrante>();
 
-    public void cadastrarPalestrante(){
+    public void cadastrarPalestrante() {
 
         palestrante = new Palestrante();
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o usuário: ");
-        palestrante.setUsuario(in.next());
+        palestrante.setUsuario(in.nextLine());
 
         System.out.println("Digite a senha: ");
-        palestrante.setSenha(in.next());
+        palestrante.setSenha(in.nextLine());
 
         palestrante.setId(id_generator.getAndIncrement());
-        System.out.println("O ID da palestrante registrado é: "+palestrante.getId());
+        System.out.println("O ID da palestrante registrado é: " + palestrante.getId());
 
         palestrantes.add(palestrante);
 
         in.close();
     }
 
-    public Palestrante listarPalestrantes(long id){
+    public Palestrante listarPalestrantes(long id) {
         for (Palestrante palestrante : palestrantes) {
             if (palestrante.getId() == id) {
                 return palestrante;
@@ -40,7 +41,7 @@ public class PalestranteController {
         return null;
     }
 
-    public void editarPalestrante(long id){
+    public void editarPalestrante(long id) {
         int i = 0;
         for (Palestrante palestrante : palestrantes) {
             if (palestrante.getId() == id) {
@@ -48,10 +49,10 @@ public class PalestranteController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o usuário: ");
-                palestranteEditado.setUsuario(in.next());
+                palestranteEditado.setUsuario(in.nextLine());
 
                 System.out.println("Digite a senha: ");
-                palestranteEditado.setSenha(in.next());
+                palestranteEditado.setSenha(in.nextLine());
 
                 palestranteEditado.setId(id);
 
@@ -61,13 +62,32 @@ public class PalestranteController {
         }
     }
 
-    public void deletarPalestrante(long id){
+    public void deletarPalestrante(long id) {
         int i = 0;
-        for(Palestrante palestrante : palestrantes) {
+        for (Palestrante palestrante : palestrantes) {
             if (palestrante.getId() == id) {
                 palestrantes.remove(i);
             }
             i++;
         }
+    }
+
+    public Boolean logar(String user, String password) {
+        Boolean usuarioValido = false;
+        Boolean senhaValida = false;
+        for (Palestrante palestrante : palestrantes) {
+            if (palestrante.getUsuario().equals(user)) {
+                usuarioValido = true;
+            }
+            if (palestrante.getSenha().equals(password)) {
+                senhaValida = true;
+            }
+            if (usuarioValido && senhaValida) { return true; }
+        }
+        return false;
+    }
+
+    public void addPalestrante(Palestrante palestrante) {
+        palestrantes.add(palestrante);
     }
 }

@@ -19,12 +19,12 @@ public class PessoaController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o nome: ");
-        pessoa.setNome(in.next());
+        pessoa.setNome(in.nextLine());
 
         Boolean valido = false;
         while(!valido){
             System.out.println("Digite o CPF (sem pontuações): ");
-            String CPF = in.next();
+            String CPF = in.nextLine();
             valido = validarCPF(CPF);
             if(valido) {
                 pessoa.setCpf(CPF);
@@ -32,7 +32,7 @@ public class PessoaController {
         }
 
         System.out.println("Digite o email: ");
-        pessoa.setEmail(in.next());
+        pessoa.setEmail(in.nextLine());
 
         pessoa.setId(id_generator.getAndIncrement());
         System.out.println("O ID da pessoa registrada é: "+pessoa.getId());
@@ -59,12 +59,12 @@ public class PessoaController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o nome: ");
-                pessoaEditado.setNome(in.next());
+                pessoaEditado.setNome(in.nextLine());
 
                 Boolean valido = false;
                 while(!valido){
                     System.out.println("Digite o CPF (sem pontuações): ");
-                    String CPF = in.next();
+                    String CPF = in.nextLine();
                     valido = validarCPF(CPF);
                     if (valido) {
                         pessoaEditado.setCpf(CPF);
@@ -72,7 +72,7 @@ public class PessoaController {
                 }
 
                 System.out.println("Digite o email: ");
-                pessoaEditado.setEmail(in.next());
+                pessoaEditado.setEmail(in.nextLine());
 
                 pessoaEditado.setId(id);
 

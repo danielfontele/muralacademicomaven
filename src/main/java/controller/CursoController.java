@@ -18,7 +18,7 @@ public class CursoController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o nome: ");
-        curso.setNome(in.next());
+        curso.setNome(in.nextLine());
 
         curso.setId(id_generator.getAndIncrement());
         System.out.println("O ID da curso registrado é: "+curso.getId());
@@ -45,7 +45,7 @@ public class CursoController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o nome: ");
-                cursoEditado.setNome(in.next());
+                cursoEditado.setNome(in.nextLine());
 
                 cursoEditado.setId(id);
 

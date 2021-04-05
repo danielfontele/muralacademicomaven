@@ -17,22 +17,22 @@ public class EnderecoController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o nome da sua rua: ");
-        endereco.setRua(in.next());
+        endereco.setRua(in.nextLine());
 
         System.out.println("Digite o número: ");
-        endereco.setNumero(in.next());
+        endereco.setNumero(in.nextLine());
 
         System.out.println("Digite o bairro: ");
-        endereco.setBairro(in.next());
+        endereco.setBairro(in.nextLine());
 
         System.out.println("Digite o complemento: ");
-        endereco.setComplemento(in.next());
+        endereco.setComplemento(in.nextLine());
 
         System.out.println("Digite a cidade: ");
-        endereco.setCidade(in.next());
+        endereco.setCidade(in.nextLine());
 
         System.out.println("Digite o estado: ");
-        endereco.setEstado(in.next());
+        endereco.setEstado(in.nextLine());
 
         enderecos.add(endereco);
 
@@ -56,22 +56,22 @@ public class EnderecoController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o nome da sua rua: ");
-                enderecoEditado.setRua(in.next());
+                enderecoEditado.setRua(in.nextLine());
 
                 System.out.println("Digite o número: ");
-                enderecoEditado.setNumero(in.next());
+                enderecoEditado.setNumero(in.nextLine());
 
                 System.out.println("Digite o bairro: ");
-                enderecoEditado.setBairro(in.next());
+                enderecoEditado.setBairro(in.nextLine());
 
                 System.out.println("Digite o complemento: ");
-                enderecoEditado.setComplemento(in.next());
+                enderecoEditado.setComplemento(in.nextLine());
 
                 System.out.println("Digite a cidade: ");
-                enderecoEditado.setCidade(in.next());
+                enderecoEditado.setCidade(in.nextLine());
 
                 System.out.println("Digite o estado: ");
-                enderecoEditado.setEstado(in.next());
+                enderecoEditado.setEstado(in.nextLine());
 
                 enderecos.set(index, enderecoEditado);
 

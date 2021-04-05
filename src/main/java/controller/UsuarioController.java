@@ -18,10 +18,10 @@ public class UsuarioController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o usuário: ");
-        usuario.setUsuario(in.next());
+        usuario.setUsuario(in.nextLine());
 
         System.out.println("Digite a senha: ");
-        usuario.setSenha(in.next());
+        usuario.setSenha(in.nextLine());
 
         usuario.setId(id_generator.getAndIncrement());
         System.out.println("O ID da usuario registrado é: "+usuario.getId());
@@ -48,10 +48,10 @@ public class UsuarioController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o usuário: ");
-                usuarioEditado.setUsuario(in.next());
+                usuarioEditado.setUsuario(in.nextLine());
 
                 System.out.println("Digite a senha: ");
-                usuarioEditado.setSenha(in.next());
+                usuarioEditado.setSenha(in.nextLine());
 
                 usuarioEditado.setId(id);
 
@@ -71,5 +71,25 @@ public class UsuarioController {
             }
             index++;
         }
+    }
+
+    public Boolean logar(String user, String password){
+        Boolean usuarioValido = false;
+        Boolean senhaValida = false;
+        for (Usuario usuario : usuarios ){
+            if (usuario.getUsuario().equals(usuario)){
+                usuarioValido = true;
+            }
+            if (usuario.getSenha().equals(password)) {
+                senhaValida = true;
+            }
+            if(usuarioValido && senhaValida) { return true; }
+
+        }
+        return false;
+    }
+
+    public void addUsuario(Usuario usuario) {
+        usuarios.add(usuario);
     }
 }

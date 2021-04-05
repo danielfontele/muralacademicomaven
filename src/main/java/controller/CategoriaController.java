@@ -18,7 +18,7 @@ public class CategoriaController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o nome: ");
-        categoria.setNome(in.next());
+        categoria.setNome(in.nextLine());
 
         categoria.setId(id_generator.getAndIncrement());
         System.out.println("O ID da categoria registrado é: " + categoria.getId());
@@ -45,7 +45,7 @@ public class CategoriaController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o nome: ");
-                categoriaEditado.setNome(in.next());
+                categoriaEditado.setNome(in.nextLine());
 
                 categoriaEditado.setId(id);
 

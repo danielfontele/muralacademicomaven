@@ -19,13 +19,13 @@ public class TelefoneController {
         Scanner in = new Scanner(System.in);
 
         System.out.println("Digite o código de área: ");
-        telefone.setCodigoArea(in.next());
+        telefone.setCodigoArea(in.nextLine());
 
         System.out.println("Digite o DDD: ");
-        telefone.setDDD(in.next());
+        telefone.setDDD(in.nextLine());
 
         System.out.println("Digite o número do telefone: ");
-        telefone.setNumero(in.next());
+        telefone.setNumero(in.nextLine());
 
         int tipoSelecionado = -1;
         while ((tipoSelecionado != 1) || (tipoSelecionado != 2)) {
@@ -70,13 +70,13 @@ public class TelefoneController {
                 Scanner in = new Scanner(System.in);
 
                 System.out.println("Digite o código de área: ");
-                telefoneEditado.setCodigoArea(in.next());
+                telefoneEditado.setCodigoArea(in.nextLine());
 
                 System.out.println("Digite o DDD: ");
-                telefoneEditado.setDDD(in.next());
+                telefoneEditado.setDDD(in.nextLine());
 
                 System.out.println("Digite o número do telefone: ");
-                telefoneEditado.setNumero(in.next());
+                telefoneEditado.setNumero(in.nextLine());
 
                 int tipoSelecionado = -1;
                 while ((tipoSelecionado != 1) || (tipoSelecionado != 2)) {
