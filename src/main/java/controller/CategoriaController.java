@@ -25,7 +25,6 @@ public class CategoriaController {
 
         categorias.add(categoria);
 
-        in.close();
     }
 
     public Categoria listarCategorias(long id) {
@@ -50,8 +49,6 @@ public class CategoriaController {
                 categoriaEditado.setId(id);
 
                 categorias.set(i, categoriaEditado);
-
-                in.close();
 
                 break;
             }

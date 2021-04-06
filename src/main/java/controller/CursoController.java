@@ -25,7 +25,6 @@ public class CursoController {
 
         cursos.add(curso);
 
-        in.close();
     }
 
     public Curso listarCursos(long id){
@@ -51,7 +50,6 @@ public class CursoController {
 
                 cursos.set(index, cursoEditado);
 
-                in.close();
             }
             index++;
         }

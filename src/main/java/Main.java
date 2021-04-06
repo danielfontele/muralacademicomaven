@@ -1,8 +1,6 @@
 import controller.*;
 import model.Palestrante;
 import model.Usuario;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -35,12 +33,10 @@ public class Main {
         admin.setSenha("admin");
         palestranteController.addPalestrante(admin);
 
+        Scanner in2 = new Scanner(System.in);
         Scanner in = new Scanner(System.in);
         boolean run = true;
-        int ecadastrado = -1;
-        int cadastrarP;
-        int escolhaModulo;
-        int cadastrarUser;
+        int escolha[] = new int[5];
 
         int id12;
         int id13;
@@ -67,20 +63,16 @@ public class Main {
         int id83;
         int id84;
 
-
         while (run) {
             System.out.println("Já é cadastrado?" +
                     "\n1 - Sim" +
                     "\n2 - Não");
-            ecadastrado = in.nextInt();
-
-            if (ecadastrado == 1) {
+            escolha[0] = in.nextInt();
+            if (escolha[0] == 1) {
                 System.out.println("Digite o Usuario:");
                 String usuario = in.next();
-
                 System.out.println("Digite a Senha:");
                 String senha = in.next();
-
                 if (usuarioController.logar(usuario, senha)) {        //Usuário
                     postagemController.printarPostagens();
                 } else if (palestranteController.logar(usuario, senha)) {    //Palestrante
@@ -93,9 +85,8 @@ public class Main {
                             "\n6 - Postagem" +
                             "\n7 - Telefone" +
                             "\n8 - Usuario");
-                    escolhaModulo = in.nextInt();
-
-                    switch (escolhaModulo) {
+                    escolha[3] = in.nextInt();
+                    switch (escolha[3]) {
                         case 1:
                             System.out.println("Selecione a operação:" +
                                     "\n1 - Criar" +
@@ -342,20 +333,20 @@ public class Main {
                 } else {
                     System.err.println("Usuário e/ou Senha incorreto(s)");
                 }
-            } else if (ecadastrado == 2) {
+            }
+            else if (escolha[0] == 2) {
                 System.out.println("Deseja cadastrar um usuário?" +
                         "\n1 - Sim" +
                         "\n2 - Não");
-                cadastrarUser = in.nextInt();
-                if (cadastrarUser == 1) {
+                escolha[4] = in.nextInt();
+                if (escolha[4] == 1) {
                     usuarioController.cadastrarUsuario();
-                } else if (cadastrarUser == 2) {
-                    System.out.println("\\Função Criada para testes// Deseja cadastrar um palestrante?" +
+                } else if (escolha[4] == 2) {
+                    System.out.println("#Função criada para testes -> Deseja cadastrar um palestrante?" +
                             "\n1 - Sim" +
                             "\n2 - Não");
-                    cadastrarP = in.nextInt();
-
-                    if (cadastrarP == 1) {
+                    escolha[2] = in2.nextInt();
+                    if (escolha[2] == 1) {
                         palestranteController.cadastrarPalestrante();
                     } else {
                         System.out.println("Escolha inválida!");
@@ -364,7 +355,15 @@ public class Main {
                     System.err.println("Comando inválido!");
                 }
             }
-            System.out.println(",_.-*ª'*-._, Obrigado por utilizar o sistema ,_.-*'ª*-._,");
+            System.out.println("Deseja encerrar o programa?\n1 - Sim\n2 - Não");
+            if(in.hasNextLine()){
+                escolha[1] = in.nextInt();
+            }
+            if(escolha[1] == 1) {
+                System.out.println(",_.-*ª'*-._, Obrigado por utilizar o sistema ,_.-*'ª*-._,");
+                run = false;
+            }
         }
+        in.close();
     }
 }

@@ -15,18 +15,13 @@ public class PostagemController {
     private Postagem postagem;
 
     public void cadastrarPostagem(){
-
         postagem = new Postagem();
         Scanner in = new Scanner(System.in);
-
         System.out.println("Digite o título: ");
         postagem.setTitulo(in.nextLine());
-
         System.out.println("Digite o conteúdo: ");
         postagem.setConteudo(in.nextLine());
-
         postagem.setData(LocalDate.now());
-
         int i = -1;
         while(i < 1 || i > 5){
             System.out.println("Selecione o nível:" +
@@ -36,7 +31,6 @@ public class PostagemController {
                     "\n4 - Doutorado" +
                     "\n5 - Pós-Doutorado");
             i = in.nextInt();
-
             switch (i){
                 case 1:
                     postagem.setNivel(Nivel.Graduacao);
@@ -64,7 +58,7 @@ public class PostagemController {
 
         postagens.add(postagem);
 
-        in.close();
+
     }
 
     public Postagem listarPostagens(long id){
@@ -77,6 +71,9 @@ public class PostagemController {
     }
 
     public void printarPostagens(){
+        if(postagens.isEmpty()){
+            System.out.println("Nenhuma postagem! :(");
+        }
         for(Postagem postagem : postagens){
             System.out.println(
                              "-=- -=- -=- -=- -=-" +
@@ -145,7 +142,6 @@ public class PostagemController {
 
                 postagens.set(index, postagemEditado);
 
-                in.close();
                 break;
             }
             index++;

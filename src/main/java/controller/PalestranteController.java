@@ -29,7 +29,6 @@ public class PalestranteController {
 
         palestrantes.add(palestrante);
 
-        in.close();
     }
 
     public Palestrante listarPalestrantes(long id) {

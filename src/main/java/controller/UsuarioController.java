@@ -27,8 +27,6 @@ public class UsuarioController {
         System.out.println("O ID da usuario registrado é: "+usuario.getId());
 
         usuarios.add(usuario);
-
-        in.close();
     }
 
     public Usuario listarUsuarios(long id){
@@ -57,7 +55,6 @@ public class UsuarioController {
 
                 usuarios.set(index, usuarioEditado);
 
-                in.close();
             }
             index++;
         }
@@ -77,7 +74,7 @@ public class UsuarioController {
         Boolean usuarioValido = false;
         Boolean senhaValida = false;
         for (Usuario usuario : usuarios ){
-            if (usuario.getUsuario().equals(usuario)){
+            if (usuario.getUsuario().equals(user)){
                 usuarioValido = true;
             }
             if (usuario.getSenha().equals(password)) {

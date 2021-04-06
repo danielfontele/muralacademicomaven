@@ -36,7 +36,6 @@ public class EnderecoController {
 
         enderecos.add(endereco);
 
-        in.close();
     }
 
     public Endereco listarEndereco(long id){
@@ -75,7 +74,6 @@ public class EnderecoController {
 
                 enderecos.set(index, enderecoEditado);
 
-                in.close();
             }
             index++;
         }

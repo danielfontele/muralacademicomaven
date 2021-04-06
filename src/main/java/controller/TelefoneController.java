@@ -50,7 +50,6 @@ public class TelefoneController {
 
         telefones.add(telefone);
 
-        in.close();
     }
 
     public Telefone listarTelefones(long id){
@@ -100,7 +99,6 @@ public class TelefoneController {
 
                 telefones.set(index, telefone);
 
-                in.close();
                 break;
             }
             index++;

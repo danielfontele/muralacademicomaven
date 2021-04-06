@@ -39,7 +39,6 @@ public class PessoaController {
 
         pessoas.add(pessoa);
 
-        in.close();
     }
 
     public Pessoa listarPessoas(long id){
@@ -77,8 +76,6 @@ public class PessoaController {
                 pessoaEditado.setId(id);
 
                 pessoas.set(i, pessoa);
-
-                in.close();
             }
             i++;
         }
