@@ -1,6 +1,7 @@
 import controller.*;
 import model.Palestrante;
 import model.Usuario;
+
 import java.util.Scanner;
 
 public class Main {
@@ -37,6 +38,7 @@ public class Main {
         Scanner in = new Scanner(System.in);
         boolean run = true;
         int escolha[] = new int[5];
+        Boolean principal = true;
 
         int id12;
         int id13;
@@ -63,19 +65,62 @@ public class Main {
         int id83;
         int id84;
 
-        while (run) {
-            System.out.println("Já é cadastrado?" +
-                    "\n1 - Sim" +
-                    "\n2 - Não");
-            escolha[0] = in.nextInt();
-            if (escolha[0] == 1) {
-                System.out.println("Digite o Usuario:");
-                String usuario = in.next();
-                System.out.println("Digite a Senha:");
-                String senha = in.next();
-                if (usuarioController.logar(usuario, senha)) {        //Usuário
+        Boolean userLogado = false;
+        Boolean adminLogado = false;
+
+        Boolean cadastrado = false;
+
+
+        while (principal) {
+            while (!cadastrado) {
+                System.out.println("Já é cadastrado?" +
+                        "\n1 - Sim" +
+                        "\n2 - Não");
+                escolha[0] = in.nextInt();
+                if (escolha[0] == 1) {
+                    System.out.println("Digite o Usuario:");
+                    String usuario = in.next();
+                    System.out.println("Digite a Senha:");
+                    String senha = in.next();
+                    if (usuarioController.logar(usuario, senha)) {        //Usuário
+                        userLogado = true;
+                        cadastrado = true;
+                        adminLogado = false;
+                    } else if (palestranteController.logar(usuario, senha)) {    //Palestrante
+                        adminLogado = true;
+                        cadastrado = true;
+                        userLogado = false;
+                    } else {
+                        System.err.println("Usuário e/ou Senha incorreto(s)");
+                    }
+                } else if (escolha[0] == 2) {
+                    System.out.println("Deseja cadastrar um usuário?" +
+                            "\n1 - Sim" +
+                            "\n2 - Não");
+                    escolha[4] = in.nextInt();
+                    if (escolha[4] == 1) {
+                        usuarioController.cadastrarUsuario();
+                    } else if (escolha[4] == 2) {
+                        System.out.println("#Função criada para testes -> Deseja cadastrar um palestrante?" +
+                                "\n1 - Sim" +
+                                "\n2 - Não");
+                        escolha[2] = in2.nextInt();
+                        if (escolha[2] == 1) {
+                            palestranteController.cadastrarPalestrante();
+                        } else if (escolha[2] == 2) {
+                            System.out.println("Ok!");
+                        } else {
+                            System.out.println("Escolha inválida!");
+                        }
+                    } else {
+                        System.err.println("Comando inválido!");
+                    }
+                }
+            }
+            while (run) {
+                if (userLogado) {        //Usuário
                     postagemController.printarPostagens();
-                } else if (palestranteController.logar(usuario, senha)) {    //Palestrante
+                } else if (adminLogado) {    //Palestrante
                     System.out.println("Selecione o módulo:" +
                             "\n1 - Categoria" +
                             "\n2 - Curso" +
@@ -101,7 +146,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id12 = in.nextInt();
-                                    categoriaController.listarCategorias(id12);
+                                    if (id12 == -1) {
+                                        categoriaController.printAll();
+                                    } else {
+                                        categoriaController.print(categoriaController.listarCategorias(id12));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -109,7 +158,7 @@ public class Main {
                                     categoriaController.editarCategoria(id13);
                                     break;
                                 case 4:
-                                    System.out.println("Qual id? (-1 para todos)");
+                                    System.out.println("Qual id?");
                                     id14 = in.nextInt();
                                     categoriaController.deletarCategoria(id14);
                                     break;
@@ -131,7 +180,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id22 = in.nextInt();
-                                    cursoController.listarCursos(id22);
+                                    if (id22 == -1) {
+                                        cursoController.printAll();
+                                    } else {
+                                        cursoController.print(cursoController.listarCursos(id22));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -139,7 +192,7 @@ public class Main {
                                     cursoController.editarCurso(id23);
                                     break;
                                 case 4:
-                                    System.out.println("Qual id? (-1 para todos)");
+                                    System.out.println("Qual id?");
                                     id24 = in.nextInt();
                                     cursoController.deletarCurso(id24);
                                     break;
@@ -161,7 +214,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id32 = in.nextInt();
-                                    enderecoController.listarEndereco(id32);
+                                    if (id32 == -1) {
+                                        enderecoController.printAll();
+                                    } else {
+                                        enderecoController.print(enderecoController.listarEndereco(id32));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -191,7 +248,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id42 = in.nextInt();
-                                    palestranteController.listarPalestrantes(id42);
+                                    if (id42 == -1) {
+                                        palestranteController.printAll();
+                                    } else {
+                                        palestranteController.print(palestranteController.listarPalestrantes(id42));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -221,7 +282,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id52 = in.nextInt();
-                                    pessoaController.listarPessoas(id52);
+                                    if (id52 == -1) {
+                                        pessoaController.printAll();
+                                    } else {
+                                        pessoaController.print(pessoaController.listarPessoas(id52));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -251,7 +316,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id62 = in.nextInt();
-                                    postagemController.listarPostagens(id62);
+                                    if (id62 == -1) {
+                                        postagemController.printAll();
+                                    } else {
+                                        postagemController.print(postagemController.listarPostagens(id62));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -281,7 +350,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id72 = in.nextInt();
-                                    telefoneController.listarTelefones(id72);
+                                    if (id72 == -1) {
+                                        telefoneController.printAll();
+                                    } else {
+                                        telefoneController.print(telefoneController.listarTelefones(id72));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -311,7 +384,11 @@ public class Main {
                                 case 2:
                                     System.out.println("Qual id? (-1 para todos)");
                                     id82 = in.nextInt();
-                                    usuarioController.listarUsuarios(id82);
+                                    if (id82 == -1) {
+                                        usuarioController.printAll();
+                                    } else {
+                                        usuarioController.print(usuarioController.listarUsuarios(id82));
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Qual id?");
@@ -333,37 +410,19 @@ public class Main {
                 } else {
                     System.err.println("Usuário e/ou Senha incorreto(s)");
                 }
-            }
-            else if (escolha[0] == 2) {
-                System.out.println("Deseja cadastrar um usuário?" +
-                        "\n1 - Sim" +
-                        "\n2 - Não");
-                escolha[4] = in.nextInt();
-                if (escolha[4] == 1) {
-                    usuarioController.cadastrarUsuario();
-                } else if (escolha[4] == 2) {
-                    System.out.println("#Função criada para testes -> Deseja cadastrar um palestrante?" +
-                            "\n1 - Sim" +
-                            "\n2 - Não");
-                    escolha[2] = in2.nextInt();
-                    if (escolha[2] == 1) {
-                        palestranteController.cadastrarPalestrante();
-                    } else {
-                        System.out.println("Escolha inválida!");
-                    }
-                } else {
-                    System.err.println("Comando inválido!");
+                System.out.println("Deseja encerrar a sessão?\n1 - Sim\n2 - Não");
+                if (in.hasNextLine()) {
+                    escolha[1] = in.nextInt();
+                }
+                if (escolha[1] == 1) {
+                    System.out.println(",_.-*ª'*-._, Obrigado por utilizar o sistema ,_.-*'ª*-._,");
+                    run = false;
                 }
             }
-            System.out.println("Deseja encerrar o programa?\n1 - Sim\n2 - Não");
-            if(in.hasNextLine()){
-                escolha[1] = in.nextInt();
-            }
-            if(escolha[1] == 1) {
-                System.out.println(",_.-*ª'*-._, Obrigado por utilizar o sistema ,_.-*'ª*-._,");
-                run = false;
-            }
+            cadastrado = false;
+            run = true;
         }
         in.close();
+
     }
 }

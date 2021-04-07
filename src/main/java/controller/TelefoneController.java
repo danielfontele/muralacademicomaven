@@ -1,8 +1,10 @@
 package controller;
 
+import model.Postagem;
 import model.Telefone;
 import model.TelefoneTipo;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -115,5 +117,20 @@ public class TelefoneController {
             index++;
         }
     }
+
+    public void print(Telefone telefone){
+        System.out.println("\nId: " + telefone.getId()+
+                "\nCódigo de área: "+ telefone.getCodigoArea()+
+                "\nDDD: " + telefone.getDDD() +
+                "\nNúmero: " + telefone.getNumero() +
+                "\nTipo: " + telefone.getTipo());
+    }
+
+    public void printAll(){
+        for (Telefone telefone : telefones) {
+            print(telefone);
+        }
+    }
+
 }
 

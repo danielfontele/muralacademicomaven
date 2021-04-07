@@ -3,6 +3,7 @@ package controller;
 import model.Nivel;
 import model.Postagem;
 
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -104,7 +105,7 @@ public class PostagemController {
                 System.out.println("Digite o conteúdo: ");
                 postagemEditado.setConteudo(in.nextLine());
 
-                postagemEditado.setData(LocalDate.now());
+                postagemEditado.setData(postagem.getData());
 
                 int i = -1;
                 while(i < 1 || i > 5){
@@ -160,5 +161,20 @@ public class PostagemController {
         }
     }
 
+    public void print(Postagem postagem){
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        System.out.println("\nId: " + postagem.getId()+
+                "\nTítulo: "+ postagem.getTitulo() +
+                "\nConteúdo: " + postagem.getConteudo() +
+                "\nData: " + formatDate.format(postagem.getData()) +
+                "\nNível: " + postagem.getNivel());
+    }
+
+    public void printAll(){
+        for (Postagem postagem : postagens) {
+            print(postagem);
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Endereco;
 import model.Palestrante;
 import model.Usuario;
 
@@ -89,4 +90,18 @@ public class PalestranteController {
     public void addPalestrante(Palestrante palestrante) {
         palestrantes.add(palestrante);
     }
+
+    public void print(Palestrante palestrante){
+        System.out.println("\n !! Método criado afins de teste !! " +
+                "\nId: " + palestrante.getId()+
+                "\nUsuário: "+ palestrante.getUsuario() +
+                "\nSenha: " + palestrante.getSenha() );
+    }
+
+    public void printAll(){
+        for (Palestrante palestrante : palestrantes) {
+            print(palestrante);
+        }
+    }
+
 }

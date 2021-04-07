@@ -1,5 +1,6 @@
 package controller;
 
+import model.Categoria;
 import model.Curso;
 
 import java.util.ArrayList;
@@ -62,6 +63,17 @@ public class CursoController {
                 cursos.remove(index);
             }
             index++;
+        }
+    }
+
+    public void print(Curso curso){
+        System.out.println("\nId: " +curso.getId()+
+                "\nNome: "+curso.getNome());
+    }
+
+    public void printAll(){
+        for (Curso curso : cursos) {
+            print(curso);
         }
     }
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import model.Pessoa;
+import model.Usuario;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -145,6 +146,20 @@ public class PessoaController {
             else return(false);
         } catch (InputMismatchException erro) {
             return(false);
+        }
+    }
+
+    public void print(Pessoa pessoa){
+        TelefoneController telefoneController = new TelefoneController();
+        System.out.println("\nId: " + pessoa.getId()+
+                "\nNome: "+ pessoa.getNome() +
+                "\nCPF: " + pessoa.getCpf() +
+                "\nEmail: " + pessoa.getEmail() );
+    }
+
+    public void printAll(){
+        for (Pessoa pessoa : pessoas) {
+            print(pessoa);
         }
     }
 

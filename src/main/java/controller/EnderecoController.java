@@ -1,5 +1,6 @@
 package controller;
 
+import model.Curso;
 import model.Endereco;
 
 import java.util.ArrayList;
@@ -86,6 +87,22 @@ public class EnderecoController {
                 enderecos.remove(index);
             }
             index++;
+        }
+    }
+
+    public void print(Endereco endereco){
+        System.out.println("\nId: " + endereco.getId()+
+                "\nRua: "+ endereco.getRua() +
+                "\nNúmero: " + endereco.getNumero() +
+                "\nComplemento: " + endereco.getComplemento() +
+                "\nBairro: " + endereco.getBairro() +
+                "\nCidade: " + endereco.getCidade() +
+                "\nEstado: " + endereco.getEstado());
+    }
+
+    public void printAll(){
+        for (Endereco endereco : enderecos) {
+            print(endereco);
         }
     }
 

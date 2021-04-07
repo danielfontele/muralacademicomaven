@@ -65,4 +65,15 @@ public class CategoriaController {
             i++;
         }
     }
+    
+    public void print(Categoria categoria){
+        System.out.println("\nId: " +categoria.getId()+
+                "\nNome: "+categoria.getNome());
+    }
+
+    public void printAll(){
+        for (Categoria categoria : categorias) {
+            print(categoria);
+        }
+    }
 }

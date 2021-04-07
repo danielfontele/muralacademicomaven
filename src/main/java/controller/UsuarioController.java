@@ -1,5 +1,6 @@
 package controller;
 
+import model.Palestrante;
 import model.Usuario;
 
 import java.util.ArrayList;
@@ -88,5 +89,18 @@ public class UsuarioController {
 
     public void addUsuario(Usuario usuario) {
         usuarios.add(usuario);
+    }
+
+    public void print(Usuario usuario){
+        System.out.println("\n !! Método criado afins de teste !! " +
+                "\nId: " + usuario.getId()+
+                "\nUsuário: "+ usuario.getUsuario() +
+                "\nSenha: " + usuario.getSenha() );
+    }
+
+    public void printAll(){
+        for (Usuario usuario : usuarios) {
+            print(usuario);
+        }
     }
 }
