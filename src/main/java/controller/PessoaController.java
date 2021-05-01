@@ -2,9 +2,11 @@ package controller;
 
 import model.Pessoa;
 import model.Usuario;
+import model.dao.PessoaDao;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,6 +15,7 @@ public class PessoaController {
     private ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
     private static AtomicInteger id_generator = new AtomicInteger(0);
     private Pessoa pessoa;
+    private PessoaDao pessoaDao;
 
     public void cadastrarPessoa(){
 
@@ -92,7 +95,44 @@ public class PessoaController {
         }
     }
 
+    //Dao Crud ============================================
+    public boolean salvarPessoa(Pessoa pessoa) {
+        pessoaDao = new PessoaDao();
+        boolean isSalvo = pessoaDao.salvarPessoa(pessoa);
+        return isSalvo;
+    }
 
+    public ArrayList<Pessoa> listarPessoas() {
+        pessoaDao = new PessoaDao();
+        ArrayList<Pessoa> pessoas;
+        return pessoas = pessoaDao.listarPessoas();
+    }
+
+    public boolean editarPessoa(Pessoa pessoa) {
+        pessoaDao = new PessoaDao();
+        boolean isSalvo = pessoaDao.editarPessoa(pessoa);
+        return isSalvo;
+    }
+
+    public boolean deletarPessoa(int id) {
+        pessoaDao = new PessoaDao();
+        boolean isSalvo = pessoaDao.deletarPessoa(id);
+        return isSalvo;
+    }
+
+    public Pessoa procurarPessoaPorID(int id) {
+        pessoaDao = new PessoaDao();
+        Pessoa pessoa = pessoaDao.buscarPessoaPorID(id);
+        return pessoa;
+    }
+
+    public boolean salvarPessoaComEndereco(Pessoa pessoa) {
+        pessoaDao = new PessoaDao();
+        boolean isSalvo = pessoaDao.salvarPessoaComTelefones(pessoa);
+        return isSalvo;
+    }
+
+    //Extra Methods
     public static Boolean validarCPF(String CPF){
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||

@@ -7,6 +7,7 @@ public class Telefone {
     private String DDD;
     private String numero;
     private TelefoneTipo tipo;
+    private int idPessoa;
 
     public Telefone() {
     }
@@ -49,5 +50,13 @@ public class Telefone {
 
     public void setTipo(TelefoneTipo tipo) {
         this.tipo = tipo;
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
 }

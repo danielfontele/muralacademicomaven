@@ -1,7 +1,10 @@
 import controller.*;
 import model.Palestrante;
+import model.Pessoa;
 import model.Usuario;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +19,15 @@ public class Main {
         TelefoneController telefoneController = new TelefoneController();
         UsuarioController usuarioController = new UsuarioController();
 
+
+        ArrayList<Pessoa> pessoas = pessoaController.listarPessoas();
+        for(Iterator iterator = pessoas.iterator(); iterator.hasNext();){
+            Pessoa pessoa = (Pessoa) iterator.next();
+            System.out.println("id: "+pessoa.getId());
+            System.out.println("nome: "+pessoa.getNome());
+            System.out.println("cpf: "+pessoa.getCpf());
+            System.out.println("email: "+pessoa.getEmail());
+        }
 
         //Setando contas testes
         System.out.println("Usuário teste:      user");
