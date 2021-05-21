@@ -2,17 +2,18 @@ package model;
 
 public class Curso {
 
-    private long id;
+    private int id;
     private String nome;
+    private int idPostagem;
 
     public Curso() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -23,4 +24,13 @@ public class Curso {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public int getIdPostagem() {
+        return this.idPostagem;
+    }
+
+    public void setIdPostagem(int idPostagem) {
+        this.idPostagem = idPostagem;
+    }
+
 }

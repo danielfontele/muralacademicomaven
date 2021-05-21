@@ -2,18 +2,19 @@ package model;
 
 public class Palestrante {
 
-    private long id;
+    private int id;
     private String usuario;
     private String senha;
+    private int idPessoa;
 
     public Palestrante() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -32,4 +33,13 @@ public class Palestrante {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public int getIdPessoa() {
+        return this.idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
 }

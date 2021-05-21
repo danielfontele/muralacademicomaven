@@ -10,7 +10,7 @@ public class ConnectionFactory {
     public Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_construcao","root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_muralacademico", "root", "root");
             return con;
         } catch (Exception e) {
             System.err.println("Erro ao obter a conexão:  " + e.getMessage());
@@ -27,4 +27,3 @@ public class ConnectionFactory {
     }
 
 }
-

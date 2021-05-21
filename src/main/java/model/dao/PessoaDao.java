@@ -5,10 +5,8 @@ import model.utilDao.ConnectionFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PessoaDao {
-
 
     Connection con;
     private Statement statement;
@@ -19,7 +17,7 @@ public class PessoaDao {
         con = connectionFactory.getConnection();
     }
 
-    public ArrayList<Pessoa> listarPessoas(){
+    public ArrayList<Pessoa> listar() {
         ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
         ResultSet set;
 
@@ -40,24 +38,26 @@ public class PessoaDao {
         } catch (Exception e) {
             System.err.println("Erro ao listar pessoas: " + e.getMessage());
         }
-
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao fecha a conexão: " + e.getMessage());
+        }
         return pessoas;
     }
 
-    public boolean editarPessoa(Pessoa pessoa) {
+    public boolean editar(Pessoa pessoa) {
         Boolean isSalvo = false;
-        String query = "UPDATE pessoa SET " +
-                "nome = ?," +
-                "cpf = ?," +
-                "email = ? " +
-                "WHERE id = ?;" ;
+        String query = "UPDATE pessoa SET " + "nome = ?," + "cpf = ?," + "email = ?, " + "idEndereco = ? "
+                + "WHERE id = ?;";
         try {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, pessoa.getNome());
             preparedStatement.setString(2, pessoa.getCpf());
             preparedStatement.setString(3, pessoa.getEmail());
-            preparedStatement.setInt(4, (int) pessoa.getId());
+            preparedStatement.setInt(4, pessoa.getIdEndereco());
+            preparedStatement.setInt(5, pessoa.getId());
 
             preparedStatement.execute();
             con.commit();
@@ -66,12 +66,44 @@ public class PessoaDao {
             System.err.println("Erro ao editar pessoa: " + e.getMessage());
             isSalvo = false;
         }
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao fecha a conexão: " + e.getMessage());
+        }
         return isSalvo;
     }
 
-    public boolean salvarPessoa(Pessoa pessoa) {
+    public boolean salvar(Pessoa pessoa) {
         Boolean isSalvo = false;
-        String query = "inset into pessoa (nome,cpf,email) values (?,?,?);";
+        String query = "insert into pessoa (nome,cpf,email,idEndereco) values (?,?,?,?);";
+        try {
+            con.setAutoCommit(false);
+            preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, pessoa.getNome());
+            preparedStatement.setString(2, pessoa.getCpf());
+            preparedStatement.setString(3, pessoa.getEmail());
+            preparedStatement.setInt(4, pessoa.getIdEndereco());
+
+            preparedStatement.execute();
+            con.commit();
+            isSalvo = true;
+
+        } catch (Exception e) {
+            System.err.println("Erro ao salvar pessoa: " + e.getMessage());
+            isSalvo = false;
+        }
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao fecha a conexão: " + e.getMessage());
+        }
+        return isSalvo;
+    }
+
+    public boolean salvarSemEndereco(Pessoa pessoa) {
+        Boolean isSalvo = false;
+        String query = "insert into pessoa (nome,cpf,email) values (?,?,?);";
         try {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
@@ -91,10 +123,9 @@ public class PessoaDao {
         return isSalvo;
     }
 
-    public boolean deletarPessoa(int id) {
+    public boolean deletar(int id) {
         Boolean isSalvo = false;
-        String query = "delete from pessoa " +
-                "WHERE id = ?;" ;
+        String query = "delete from pessoa " + "WHERE id = ?;";
         try {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
@@ -107,13 +138,17 @@ public class PessoaDao {
             System.err.println("Erro ao deletar pessoa: " + e.getMessage());
             isSalvo = false;
         }
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao fecha a conexão: " + e.getMessage());
+        }
         return isSalvo;
     }
 
-    public Pessoa buscarPessoaPorID(int id) {
+    public Pessoa findByID(int id) {
         Pessoa pessoa = new Pessoa();
-        String query = "select * from pessoa " +
-                "WHERE id = " + id + ";" ;
+        String query = "select * from pessoa " + "WHERE id = " + id + ";";
         ResultSet set;
         try {
             preparedStatement = con.prepareStatement(query);
@@ -125,33 +160,38 @@ public class PessoaDao {
                 pessoa.setNome(set.getString("nome"));
                 pessoa.setCpf(set.getString("cpf"));
                 pessoa.setEmail(set.getString("email"));
+                pessoa.setIdEndereco(set.getInt("idEndereco"));
             }
 
         } catch (Exception e) {
             System.err.println("Erro ao deletar pessoa: " + e.getMessage());
         }
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao fecha a conexão: " + e.getMessage());
+        }
         return pessoa;
     }
 
-    public boolean salvarPessoaComTelefones(Pessoa pessoa) {
+    public boolean salvarComTelefones(Pessoa pessoa) {
         boolean isSalvo = false;
-        String queryPessoa = "inset into pessoa (nome,cpf,email) values (?,?,?);";
-        String queryTelefone = "INSERT INTO telefone(codigoArea, DDD, numero, tipo, idPessoa) " +
-                "VALUES (?,?,?,?,?);";
+        String queryPessoa = "insert into pessoa (nome,cpf,email,idEndereco) values (?,?,?,?);";
+        String queryTelefone = "INSERT INTO telefone(codigoArea, DDD, numero, tipo, idPessoa) " + "VALUES (?,?,?,?,?);";
         try {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(queryPessoa);
             preparedStatement.setString(1, pessoa.getNome());
             preparedStatement.setString(2, pessoa.getCpf());
             preparedStatement.setString(3, pessoa.getEmail());
-
+            preparedStatement.setInt(4, pessoa.getIdEndereco());
 
             preparedStatement.execute();
 
             int idTemp = 0;
             try {
                 ResultSet rset = preparedStatement.executeQuery("select last_insert_id() as id;");
-                while (rset.next()){
+                while (rset.next()) {
                     idTemp = rset.getInt("id");
                 }
             } catch (Exception e) {
@@ -161,18 +201,18 @@ public class PessoaDao {
 
             final int idPessoa = idTemp;
 
-            pessoa.getTelefones().forEach(telefone ->{
+            pessoa.getTelefones().forEach(telefone -> {
                 try {
-                preparedStatement = con.prepareStatement(queryTelefone);
-                preparedStatement.setString(1, telefone.getCodigoArea());
-                preparedStatement.setString(2, telefone.getDDD());
-                preparedStatement.setString(3, telefone.getNumero());
-                preparedStatement.setString(4, String.valueOf(telefone.getTipo()));
-                preparedStatement.setInt(5, idPessoa);
+                    preparedStatement = con.prepareStatement(queryTelefone);
+                    preparedStatement.setString(1, telefone.getCodigoArea());
+                    preparedStatement.setString(2, telefone.getDDD());
+                    preparedStatement.setString(3, telefone.getNumero());
+                    preparedStatement.setString(4, String.valueOf(telefone.getTipo()));
+                    preparedStatement.setInt(5, idPessoa);
 
-                preparedStatement.execute();
+                    preparedStatement.execute();
 
-                } catch (SQLException e){
+                } catch (SQLException e) {
                     try {
                         con.rollback();
                     } catch (SQLException e1) {
@@ -195,7 +235,11 @@ public class PessoaDao {
                 e1.printStackTrace();
             }
         }
-
+        try {
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao fecha a conexão: " + e.getMessage());
+        }
         return isSalvo;
     }
 

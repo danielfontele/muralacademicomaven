@@ -1,24 +1,24 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Pessoa {
 
-    private long id;
+    private int id;
     private String nome;
     private String cpf;
     private String email;
-    private ArrayList<Telefone> telefones;
-    private Usuario usuario;
+    private int idEndereco;
+    private List<Telefone> telefones;
 
     public Pessoa() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -46,19 +46,20 @@ public class Pessoa {
         this.email = email;
     }
 
-    public ArrayList<Telefone> getTelefones() {
-        return telefones;
+    public int getIdEndereco() {
+        return this.idEndereco;
     }
 
-    public void setTelefones(ArrayList<Telefone> telefones) {
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
+    }
+
+    public List<Telefone> getTelefones() {
+        return this.telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }

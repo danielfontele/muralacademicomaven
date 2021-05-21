@@ -2,17 +2,18 @@ package model;
 
 public class Categoria {
 
-    private long id;
+    private int id;
     private String nome;
+    private int idPostagem;
 
     public Categoria() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -24,5 +25,12 @@ public class Categoria {
         this.nome = nome;
     }
 
+    public int getIdPostagem() {
+        return this.idPostagem;
+    }
+
+    public void setIdPostagem(int idPostagem) {
+        this.idPostagem = idPostagem;
+    }
 
 }

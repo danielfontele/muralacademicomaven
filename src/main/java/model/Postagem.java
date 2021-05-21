@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Postagem {
 
-    private long id;
+    private int id;
     private String titulo;
     private String conteudo;
     private LocalDate data;
@@ -13,15 +13,16 @@ public class Postagem {
     private ArrayList<Curso> cursos;
     private Palestrante autor;
     private Nivel nivel;
+    private int idPalestrante;
 
     public Postagem() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -80,4 +81,13 @@ public class Postagem {
     public void setNivel(Nivel nivel) {
         this.nivel = nivel;
     }
+
+    public int getIdPalestrante() {
+        return this.idPalestrante;
+    }
+
+    public void setIdPalestrante(int idPalestrante) {
+        this.idPalestrante = idPalestrante;
+    }
+
 }
