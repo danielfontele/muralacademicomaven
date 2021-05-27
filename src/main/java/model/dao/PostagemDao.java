@@ -32,6 +32,7 @@ public class PostagemDao {
                 postagem.setConteudo(set.getString("conteudo"));
                 postagem.setData(convertToLocalDateViaSqlDate(set.getDate("data")));
                 postagem.setIdPalestrante(set.getInt("idPalestrante"));
+                postagem.setTitulo(set.getString("titulo"));
 
                 postagens.add(postagem);
             }

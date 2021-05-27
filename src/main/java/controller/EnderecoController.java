@@ -78,6 +78,12 @@ public class EnderecoController {
         return isSalvo;
     }
 
+    public boolean salvar(Endereco endereco) {
+        enderecoDao = new EnderecoDao();
+        boolean isSalvo = enderecoDao.salvar(endereco);
+        return isSalvo;
+    }
+
     public ArrayList<Endereco> listar() {
         enderecoDao = new EnderecoDao();
         ArrayList<Endereco> enderecos = enderecoDao.listar();
@@ -93,9 +99,23 @@ public class EnderecoController {
         return isSalvo;
     }
 
+    public boolean editar(Endereco endereco) {
+        enderecoDao = new EnderecoDao();
+        int id = endereco.getId();
+        endereco.setId(id);
+        boolean isSalvo = enderecoDao.editar(endereco);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         enderecoDao = new EnderecoDao();
         int id = informarId();
+        boolean isSalvo = enderecoDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        enderecoDao = new EnderecoDao();
         boolean isSalvo = enderecoDao.deletar(id);
         return isSalvo;
     }

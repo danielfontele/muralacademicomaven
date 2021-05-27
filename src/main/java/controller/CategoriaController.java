@@ -62,6 +62,17 @@ public class CategoriaController {
         return isSalvo;
     }
 
+    public boolean salvar(Categoria categoria) {
+        categoriaDao = new CategoriaDao();
+        Boolean isSalvo;
+        if (categoria.getIdPostagem() == 0) {
+            isSalvo = categoriaDao.salvarSemPostagem(categoria);
+        } else {
+            isSalvo = categoriaDao.salvar(categoria);
+        }
+        return isSalvo;
+    }
+
     public ArrayList<Categoria> listar() {
         categoriaDao = new CategoriaDao();
         ArrayList<Categoria> categorias = categoriaDao.listar();
@@ -77,9 +88,23 @@ public class CategoriaController {
         return isSalvo;
     }
 
+    public boolean editar(Categoria categoria) {
+        categoriaDao = new CategoriaDao();
+        int id = categoria.getId();
+        categoria.setId(id);
+        boolean isSalvo = categoriaDao.editar(categoria);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         categoriaDao = new CategoriaDao();
         int id = informarId();
+        boolean isSalvo = categoriaDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        categoriaDao = new CategoriaDao();
         boolean isSalvo = categoriaDao.deletar(id);
         return isSalvo;
     }

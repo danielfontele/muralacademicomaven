@@ -68,6 +68,17 @@ public class PalestranteController {
         return isSalvo;
     }
 
+    public boolean salvar(Palestrante palestrante) {
+        palestranteDao = new PalestranteDao();
+        Boolean isSalvo;
+        if (palestrante.getIdPessoa() == 0) {
+            isSalvo = palestranteDao.salvarSemPessoa(palestrante);
+        } else {
+            isSalvo = palestranteDao.salvar(palestrante);
+        }
+        return isSalvo;
+    }
+
     public ArrayList<Palestrante> listar() {
         palestranteDao = new PalestranteDao();
         ArrayList<Palestrante> palestrantes = palestranteDao.listar();
@@ -83,9 +94,23 @@ public class PalestranteController {
         return isSalvo;
     }
 
+    public boolean editar(Palestrante palestrante) {
+        palestranteDao = new PalestranteDao();
+        int id = palestrante.getId();
+        palestrante.setId(id);
+        boolean isSalvo = palestranteDao.editar(palestrante);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         palestranteDao = new PalestranteDao();
         int id = informarId();
+        boolean isSalvo = palestranteDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        palestranteDao = new PalestranteDao();
         boolean isSalvo = palestranteDao.deletar(id);
         return isSalvo;
     }

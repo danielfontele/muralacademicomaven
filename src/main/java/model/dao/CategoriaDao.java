@@ -99,7 +99,7 @@ public class CategoriaDao {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, categoria.getNome());
-            preparedStatement.setInt(1, categoria.getIdPostagem());
+            preparedStatement.setInt(2, categoria.getIdPostagem());
 
             preparedStatement.execute();
             con.commit();

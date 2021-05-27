@@ -105,6 +105,17 @@ public class PostagemController {
         return isSalvo;
     }
 
+    public boolean salvar(Postagem postagem) {
+        postagemDao = new PostagemDao();
+        Boolean isSalvo;
+        if (postagem.getIdPalestrante() == 0) {
+            isSalvo = postagemDao.salvarSemPalestrante(postagem);
+        } else {
+            isSalvo = postagemDao.salvar(postagem);
+        }
+        return isSalvo;
+    }
+
     public ArrayList<Postagem> listar() {
         postagemDao = new PostagemDao();
         ArrayList<Postagem> postagens = postagemDao.listar();
@@ -120,9 +131,23 @@ public class PostagemController {
         return isSalvo;
     }
 
+    public boolean editar(Postagem postagem) {
+        postagemDao = new PostagemDao();
+        int id = postagem.getId();
+        postagem.setId(id);
+        boolean isSalvo = postagemDao.editar(postagem);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         postagemDao = new PostagemDao();
         int id = informarId();
+        boolean isSalvo = postagemDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        postagemDao = new PostagemDao();
         boolean isSalvo = postagemDao.deletar(id);
         return isSalvo;
     }

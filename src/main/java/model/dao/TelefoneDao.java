@@ -56,7 +56,11 @@ public class TelefoneDao {
         try {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
-
+            preparedStatement.setString(1, telefone.getCodigoArea());
+            preparedStatement.setString(2, telefone.getDDD());
+            preparedStatement.setString(3, telefone.getNumero());
+            preparedStatement.setString(4, telefone.getTipo().name());
+            preparedStatement.setInt(5, (int) telefone.getIdPessoa());
             preparedStatement.setInt(6, (int) telefone.getId());
 
             preparedStatement.execute();

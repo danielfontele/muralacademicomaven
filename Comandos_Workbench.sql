@@ -17,7 +17,7 @@ create table endereco(
 create table pessoa(
 	id int not null auto_increment primary key,
     nome varchar(200) not null,
-    cpf varchar(11) not null unique,
+    cpf varchar(14) not null unique,
     email varchar(200) not null unique,
     idEndereco int,
     constraint foreign key (idEndereco) references endereco(id)
@@ -57,7 +57,7 @@ create table postagem(
     idPalestrante int,
     constraint foreign key (idPalestrante) references palestrante(id)
 );
-  
+
 create table categoria(
 	id int not null auto_increment primary key,
     nome varchar(40) not null,
@@ -75,8 +75,8 @@ create table curso(
 INSERT INTO endereco (rua,numero,complemento,bairro,cidade,estado) VALUES ("Rua Primeiro de Maio","40","","Bairro Clima Bom","Buritis de Minas","MG");
 INSERT INTO endereco (rua,numero,complemento,bairro,cidade,estado) VALUES ("Rua Teresina","28","Ao lado do 'mercado são pão'","União","Goiânia","GO");
 
-INSERT INTO pessoa (nome,cpf,email,idEndereco) VALUES ("Enzo","11111111111","enzo@gmail.com",1);
-INSERT INTO pessoa (nome,cpf,email,idEndereco) VALUES ("Marcos","22222222222","marcos@gmail.com",2);
+INSERT INTO pessoa (nome,cpf,email,idEndereco) VALUES ("Enzo","95825029834","enzo@gmail.com",1);
+INSERT INTO pessoa (nome,cpf,email,idEndereco) VALUES ("Marcos","44977923740","marcos@gmail.com",2);
 
 INSERT INTO telefone (codigoArea,DDD,numero,tipo,idPessoa) VALUES ("+55","062","99999-9999","Celular",1);
 INSERT INTO telefone (codigoArea,DDD,numero,tipo,idPessoa) VALUES ("+55","062","3222-2222","Fixo",2);

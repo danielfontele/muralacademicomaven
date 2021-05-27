@@ -60,6 +60,17 @@ public class CursoController {
         return isSalvo;
     }
 
+    public boolean salvar(Curso curso) {
+        cursoDao = new CursoDao();
+        Boolean isSalvo;
+        if (curso.getIdPostagem() == 0) {
+            isSalvo = cursoDao.salvarSemPostagem(curso);
+        } else {
+            isSalvo = cursoDao.salvar(curso);
+        }
+        return isSalvo;
+    }
+
     public ArrayList<Curso> listar() {
         cursoDao = new CursoDao();
         ArrayList<Curso> cursos = cursoDao.listar();
@@ -75,9 +86,23 @@ public class CursoController {
         return isSalvo;
     }
 
+    public boolean editar(Curso curso) {
+        cursoDao = new CursoDao();
+        int id = curso.getId();
+        curso.setId(id);
+        boolean isSalvo = cursoDao.editar(curso);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         cursoDao = new CursoDao();
         int id = informarId();
+        boolean isSalvo = cursoDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        cursoDao = new CursoDao();
         boolean isSalvo = cursoDao.deletar(id);
         return isSalvo;
     }

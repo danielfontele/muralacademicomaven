@@ -91,6 +91,17 @@ public class TelefoneController {
         return isSalvo;
     }
 
+    public boolean salvar(Telefone telefone) {
+        telefoneDao = new TelefoneDao();
+        boolean isSalvo;
+        if (telefone.getIdPessoa() == 0) {
+            isSalvo = telefoneDao.salvarSemPessoa(telefone);
+        } else {
+            isSalvo = telefoneDao.salvar(telefone);
+        }
+        return isSalvo;
+    }
+
     public ArrayList<Telefone> listar() {
         telefoneDao = new TelefoneDao();
         ArrayList<Telefone> telefones = telefoneDao.listar();
@@ -106,9 +117,23 @@ public class TelefoneController {
         return isSalvo;
     }
 
+    public boolean editar(Telefone telefone) {
+        telefoneDao = new TelefoneDao();
+        int id = telefone.getId();
+        telefone.setId(id);
+        boolean isSalvo = telefoneDao.editar(telefone);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         telefoneDao = new TelefoneDao();
         int id = informarId();
+        boolean isSalvo = telefoneDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        telefoneDao = new TelefoneDao();
         boolean isSalvo = telefoneDao.deletar(id);
         return isSalvo;
     }

@@ -64,6 +64,17 @@ public class UsuarioController {
         return isSalvo;
     }
 
+    public boolean salvar(Usuario usuario) {
+        usuarioDao = new UsuarioDao();
+        boolean isSalvo;
+        if (usuario.getIdPessoa() == 0) {
+            isSalvo = usuarioDao.salvarSemPessoa(usuario);
+        } else {
+            isSalvo = usuarioDao.salvar(usuario);
+        }
+        return isSalvo;
+    }
+
     public ArrayList<Usuario> listar() {
         usuarioDao = new UsuarioDao();
         ArrayList<Usuario> usuarios = usuarioDao.listar();
@@ -79,9 +90,23 @@ public class UsuarioController {
         return isSalvo;
     }
 
+    public boolean editar(Usuario usuario) {
+        usuarioDao = new UsuarioDao();
+        int id = usuario.getId();
+        usuario.setId(id);
+        boolean isSalvo = usuarioDao.editar(usuario);
+        return isSalvo;
+    }
+
     public boolean deletar() {
         usuarioDao = new UsuarioDao();
         int id = informarId();
+        boolean isSalvo = usuarioDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        usuarioDao = new UsuarioDao();
         boolean isSalvo = usuarioDao.deletar(id);
         return isSalvo;
     }

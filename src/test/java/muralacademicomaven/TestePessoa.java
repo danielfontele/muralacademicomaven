@@ -14,30 +14,55 @@ public class TestePessoa {
     List<Pessoa> pessoasTeste = pessoaController.listar();
 
     @Test
-    void listar() {
+    void listarPessoa() {
         List<Pessoa> pessoas = pessoaController.listar();
+        assertFalse(pessoas.isEmpty());
+        assertEquals(pessoas.size(), pessoasTeste.size());
         assertEquals(pessoas.get(0).getCpf(), pessoasTeste.get(0).getCpf());
+
+        Pessoa pessoa = new Pessoa();
+        pessoa.setCpf("95825029834");
+        assertEquals(pessoa.getCpf(), pessoaController.listar().get(0).getCpf());
+
     }
 
     @Test
-    void listar2() {
+    void salvarPessoa() {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(1);
-        List<Pessoa> pessoas = pessoaController.listar();
-        assertTrue(!pessoas.isEmpty());
+        pessoa.setNome("Pessoa Teste 001");
+        pessoa.setCpf("352.982.466-64");
+        pessoa.setEmail("pessoa_teste@example.com");
 
-        pessoa.setCpf("11111111111");
-        assertFalse(pessoa.getCpf().equals(pessoaController.listar().get(0).getCpf()));
+        assertTrue(pessoaController.salvar(pessoa));
+        pessoa.setCpf("999.999.999-99");
+        assertFalse(pessoaController.salvar(pessoa));
     }
 
     @Test
-    void salvarCpfErrado() {
+    void editarPessoa() {
+        int id = 3;
         Pessoa pessoa = new Pessoa();
-        pessoa.setNome("Pessoa Teste 1");
-        pessoa.setCpf("666.666.666-66");
-        pessoa.setEmail("pessoaTeste@pessoaTeste.com");
+        pessoa.setId(id);
+        pessoa.setNome("Pessoa Teste 001 - editado");
+        pessoa.setCpf("778.954.911-13");
+        pessoa.setEmail("pessoaTesteEditado@example.com");
         pessoa.setIdEndereco(1);
 
-        assertTrue(pessoaController.salvar());
+        Pessoa pessoaExists = pessoaController.findByID(id);
+        assertTrue(pessoaExists.getId() != 0);
+        assertTrue(pessoaController.editar(pessoa));
+    }
+
+    @Test
+    void findPessoaByID() {
+        int id = 3;
+        Pessoa pessoa = pessoaController.findByID(id);
+        assertTrue(pessoa.getId() != 0);
+    }
+
+    @Test
+    void deletarPessoa() {
+        int id = 3;
+        assertTrue(pessoaController.deletar(id));
     }
 }

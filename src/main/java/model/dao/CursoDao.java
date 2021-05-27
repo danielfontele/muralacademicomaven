@@ -73,7 +73,7 @@ public class CursoDao {
             con.setAutoCommit(false);
             preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, curso.getNome());
-            preparedStatement.setInt(1, curso.getIdPostagem());
+            preparedStatement.setInt(2, curso.getIdPostagem());
 
             preparedStatement.execute();
             con.commit();

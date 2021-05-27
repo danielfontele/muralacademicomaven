@@ -62,10 +62,24 @@ public class PessoaController {
 
     // Dao Crud =================================================================
     // Validações feitos em preencher();
+
     public boolean salvar() {
         pessoaDao = new PessoaDao();
         Pessoa pessoa = preencher();
         Boolean isSalvo;
+        pessoa.setCpf(pessoa.getCpf().trim().replace(".", "").replace("-", ""));
+        if (pessoa.getIdEndereco() == 0) {
+            isSalvo = pessoaDao.salvarSemEndereco(pessoa);
+        } else {
+            isSalvo = pessoaDao.salvar(pessoa);
+        }
+        return isSalvo;
+    }
+
+    public boolean salvar(Pessoa pessoa) {
+        pessoaDao = new PessoaDao();
+        Boolean isSalvo;
+        pessoa.setCpf(pessoa.getCpf().trim().replace(".", "").replace("-", ""));
         if (pessoa.getIdEndereco() == 0) {
             isSalvo = pessoaDao.salvarSemEndereco(pessoa);
         } else {
@@ -84,14 +98,34 @@ public class PessoaController {
         pessoaDao = new PessoaDao();
         int id = informarId();
         Pessoa pessoa = preencher();
+        pessoa.setCpf(pessoa.getCpf().trim().replace(".", "").replace("-", ""));
         pessoa.setId(id);
         boolean isSalvo = pessoaDao.editar(pessoa);
         return isSalvo;
     }
 
+    public boolean editar(Pessoa pessoa) {
+        pessoaDao = new PessoaDao();
+        int id = pessoa.getId();
+        pessoa.setId(id);
+        if (validarCPF(pessoa.getCpf())) {
+            pessoa.setCpf(pessoa.getCpf().trim().replace(".", "").replace("-", ""));
+            boolean isSalvo = pessoaDao.editar(pessoa);
+            return isSalvo;
+        } else {
+            return false;
+        }
+    }
+
     public boolean deletar() {
         pessoaDao = new PessoaDao();
         int id = informarId();
+        boolean isSalvo = pessoaDao.deletar(id);
+        return isSalvo;
+    }
+
+    public boolean deletar(int id) {
+        pessoaDao = new PessoaDao();
         boolean isSalvo = pessoaDao.deletar(id);
         return isSalvo;
     }
@@ -116,6 +150,12 @@ public class PessoaController {
         return isSalvo;
     }
 
+    public boolean salvarComTelefone(Pessoa pessoa) {
+        pessoaDao = new PessoaDao();
+        boolean isSalvo = pessoaDao.salvarComTelefones(pessoa);
+        return isSalvo;
+    }
+
     // Metodos Extras ===========================================================
     public Pessoa preencher() {
         Pessoa pessoa = new Pessoa();
@@ -126,10 +166,11 @@ public class PessoaController {
 
         Boolean isCpfValido = false;
         while (!isCpfValido) {
-            System.out.println("Digite o CPF (sem pontuações): ");
+            System.out.println("Digite o CPF: ");
             String CPF = in.nextLine();
             isCpfValido = validarCPF(CPF);
             if (isCpfValido) {
+                CPF = CPF.trim().replace(".", "").replace("-", "");
                 pessoa.setCpf(CPF);
             }
         }
@@ -154,6 +195,8 @@ public class PessoaController {
     }
 
     public static Boolean validarCPF(String CPF) {
+
+        CPF = CPF.trim().replace(".", "").replace("-", "");
 
         if (CPF.equals("00000000000") || CPF.equals("11111111111") || CPF.equals("22222222222")
                 || CPF.equals("33333333333") || CPF.equals("44444444444") || CPF.equals("55555555555")
